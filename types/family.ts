@@ -1,7 +1,6 @@
 export interface FamilyMember {
   id: string;
-  firstName: string;
-  lastName: string;
+  fullname: string;
   gender: "male" | "female";
   birthDate?: string;
   deathDate?: string;

@@ -28,11 +28,11 @@ export const FamilyTreeNode: React.FC<FamilyTreeNodeProps> = ({ member, spouse, 
 
   const renderPerson = (person: FamilyMember, isLeft: boolean = false) => (
     <div 
-      className={`flex flex-col items-center p-4 bg-white dark:bg-zinc-900 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 border-2 ${
+      className={`flex flex-col items-center p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 border-2 bg-white dark:bg-zinc-900 ${
         person.gender === 'male' 
           ? 'border-blue-400 dark:border-blue-600' 
           : 'border-pink-400 dark:border-pink-600'
-      } hover:scale-105 min-w-[140px] ${isLeft ? 'mr-2' : ''}`}
+      } hover:scale-105 min-w-[140px] ${isLeft ? 'mr-2' : ''} ${person.deathDate ? 'opacity-50' : 'opacity-100'}`}
     >
       {/* Avatar */}
       <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-2 ${
@@ -41,18 +41,15 @@ export const FamilyTreeNode: React.FC<FamilyTreeNodeProps> = ({ member, spouse, 
           : 'bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400'
       }`}>
         <span className="text-2xl font-bold">
-          {person.firstName.charAt(0)}{person.lastName.charAt(0)}
+          {person.fullname.charAt(0)}
         </span>
       </div>
 
       {/* Name */}
       <div className="text-center">
         <h3 className="font-semibold text-sm text-zinc-900 dark:text-zinc-50">
-          {person.firstName}
+          {person.fullname}
         </h3>
-        <p className="font-semibold text-sm text-zinc-900 dark:text-zinc-50">
-          {person.lastName}
-        </p>
       </div>
 
       {/* Dates */}

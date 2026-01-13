@@ -3,6 +3,7 @@
 import React from 'react';
 import { FamilyMember, FamilyTreeData, TreeNode } from '@/types/family';
 import { FamilyTreeNode } from './FamilyTreeNode';
+import { DraggableCanvas } from './DraggableCanvas';
 
 interface FamilyTreeProps {
   data: FamilyTreeData;
@@ -104,44 +105,46 @@ export const FamilyTree: React.FC<FamilyTreeProps> = ({ data }) => {
   };
 
   return (
-    <div className="w-full min-h-screen overflow-auto bg-zinc-50 dark:bg-black py-12 px-8">
-      <div className="flex flex-col items-center">
-        {/* Header */}
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">
-            Family Tree
-          </h1>
-          <p className="text-zinc-600 dark:text-zinc-400">
-            {rootNode.member.firstName} {rootNode.member.lastName} Family
-          </p>
-        </div>
+    <DraggableCanvas>
+      <div className="py-12 px-8 inline-block min-w-full">
+        <div className="flex flex-col items-center">
+          {/* Header */}
+          <div className="mb-8 text-center">
+            <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">
+            {rootNode.member.fullname}  Family Tree
+            </h1>
+            {/* <p className="text-zinc-600 dark:text-zinc-400">
+              Family
+            </p> */}
+          </div>
 
-        {/* Tree visualization */}
-        <div className="flex justify-center items-start">
-          {renderTree(rootNode)}
-        </div>
+          {/* Tree visualization */}
+          <div className="flex justify-center items-start">
+            {renderTree(rootNode)}
+          </div>
 
-        {/* Legend */}
-        <div className="mt-12 flex gap-6 text-sm text-zinc-600 dark:text-zinc-400">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 border-2 border-blue-400 dark:border-blue-600 rounded"></div>
-            <span>Male</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 border-2 border-pink-400 dark:border-pink-600 rounded"></div>
-            <span>Female</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>♥</span>
-            <span>Married</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span>✝</span>
-            <span>Deceased</span>
+          {/* Legend */}
+          <div className="mt-12 flex gap-6 text-sm text-zinc-600 dark:text-zinc-400">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 border-2 border-blue-400 dark:border-blue-600 rounded"></div>
+              <span>Male</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 border-2 border-pink-400 dark:border-pink-600 rounded"></div>
+              <span>Female</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span>♥</span>
+              <span>Married</span>
+            </div>
+            {/* <div className="flex items-center gap-2">
+              <span>✝</span>
+              <span>Deceased</span>
+            </div> */}
           </div>
         </div>
       </div>
-    </div>
+    </DraggableCanvas>
   );
 };
 
