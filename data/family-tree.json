@@ -1,0 +1,208 @@
+{
+  "rootId": "16",
+  "members": [
+    {
+      "id": "16",
+      "firstName": "Soeharsono",
+      "lastName": "",
+      "gender": "male",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "17",
+      "childrenIds": [
+        "20",
+        "21",
+        "22",
+        "23",
+        "24"
+      ]
+    },
+    {
+      "id": "20",
+      "firstName": "Luhur",
+      "lastName": "",
+      "gender": "male",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "25",
+      "parentIds": [
+        "16",
+        "17"
+      ]
+    },
+    {
+      "id": "21",
+      "firstName": "Indah",
+      "lastName": "",
+      "gender": "female",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "27",
+      "parentIds": [
+        "16",
+        "17"
+      ]
+    },
+    {
+      "id": "22",
+      "firstName": "Rahaju",
+      "lastName": "",
+      "gender": "female",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "28",
+      "parentIds": [
+        "16",
+        "17"
+      ]
+    },
+    {
+      "id": "23",
+      "firstName": "Jun",
+      "lastName": "Widajati",
+      "gender": "female",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "29",
+      "parentIds": [
+        "16",
+        "17"
+      ],
+      "childrenIds": [
+        "31"
+      ]
+    },
+    {
+      "id": "24",
+      "firstName": "Agus",
+      "lastName": "",
+      "gender": "male",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "30",
+      "parentIds": [
+        "16",
+        "17"
+      ]
+    },
+    {
+      "id": "31",
+      "firstName": "Ariq",
+      "lastName": "Fachry",
+      "gender": "male",
+      "birthDate": "2001-11-26",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "32",
+      "parentIds": [
+        "29",
+        "23"
+      ],
+      "childrenIds": [
+        "33"
+      ]
+    },
+    {
+      "id": "33",
+      "firstName": "Yuna",
+      "lastName": "",
+      "gender": "female",
+      "birthDate": "2030-01-20",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "parentIds": [
+        "31",
+        "32"
+      ]
+    },
+    {
+      "id": "17",
+      "firstName": "Sri",
+      "lastName": "Hartini",
+      "gender": "female",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "16",
+      "childrenIds": [
+        "20",
+        "21",
+        "22",
+        "23",
+        "24"
+      ]
+    },
+    {
+      "id": "25",
+      "firstName": "Esti",
+      "lastName": "",
+      "gender": "female",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "20"
+    },
+    {
+      "id": "27",
+      "firstName": "Windu",
+      "lastName": "",
+      "gender": "male",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "21"
+    },
+    {
+      "id": "28",
+      "firstName": "Tri",
+      "lastName": "",
+      "gender": "male",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "22"
+    },
+    {
+      "id": "29",
+      "firstName": "Isy",
+      "lastName": "Karim",
+      "gender": "male",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "23",
+      "childrenIds": [
+        "31"
+      ]
+    },
+    {
+      "id": "30",
+      "firstName": "Yuli",
+      "lastName": "",
+      "gender": "female",
+      "birthDate": "1990-05-15",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "24"
+    },
+    {
+      "id": "32",
+      "firstName": "Lulu",
+      "lastName": "Irbah",
+      "gender": "female",
+      "birthDate": "2001-05-18",
+      "photoUrl": "https://example.com/photo.jpg",
+      "bio": "A brief biography of the family member",
+      "spouseId": "31",
+      "childrenIds": [
+        "33"
+      ]
+    }
+  ]
+}
