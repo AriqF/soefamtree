@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { FamilyTreeData } from '@/types/family';
 import { APIResponse } from '@/types/response';
+import { API_ENDPOINTS } from '@/lib/api-config';
+import axios from 'axios';
 
 interface UseFamilyTreeReturn {
   data: FamilyTreeData | null;
@@ -11,7 +13,7 @@ interface UseFamilyTreeReturn {
   refetch: () => void;
 }
 
-export function useFamilyTree(): UseFamilyTreeReturn {
+export function useFamilyTree(treeId: string = '2'): UseFamilyTreeReturn {
   const [data, setData] = useState<FamilyTreeData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,16 +22,19 @@ export function useFamilyTree(): UseFamilyTreeReturn {
     try {
       setLoading(true);
       setError(null);
-      
-      //TODO: change with axios
-      const response = await fetch('http://localhost:3000/v1/admin/family/tree/16');
-      console.log(response)
-      
-      if (!response.ok) {
+
+      const response = await axios.get(API_ENDPOINTS.familyTree(treeId), {
+        headers: {
+          // "ngrok-skip-browser-warning": "69420"
+        }
+      });
+      console.log(response);
+
+      if (response.status !== 200) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
-      const result: APIResponse<FamilyTreeData | null> = await response.json();
+
+      const result: APIResponse<FamilyTreeData | null> = await response.data;
       setData(result.data);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
@@ -42,7 +47,7 @@ export function useFamilyTree(): UseFamilyTreeReturn {
 
   useEffect(() => {
     fetchFamilyTree();
-  }, []);
+  }, [treeId]);
 
   return {
     data,

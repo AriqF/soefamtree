@@ -1,15 +1,27 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { FamilyMember, FamilyTreeData, TreeNode } from '@/types/family';
 import { FamilyTreeNode } from './FamilyTreeNode';
 import { DraggableCanvas } from './DraggableCanvas';
+import { PersonDrawer } from './PersonDrawer';
 
 interface FamilyTreeProps {
   data: FamilyTreeData;
 }
 
 export const FamilyTree: React.FC<FamilyTreeProps> = ({ data }) => {
+  const [selectedPerson, setSelectedPerson] = useState<FamilyMember | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const handlePersonClick = (person: FamilyMember) => {
+    setSelectedPerson(person);
+    setIsDrawerOpen(true);
+  };
+
+  const handleCloseDrawer = () => {
+    setIsDrawerOpen(false);
+  };
   // Build tree structure from flat data
   const buildTree = (memberId: string, level: number = 0): TreeNode | null => {
     const member = data.members.find(m => m.id === memberId);
@@ -37,7 +49,7 @@ export const FamilyTree: React.FC<FamilyTreeProps> = ({ data }) => {
   if (!rootNode) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-zinc-600 dark:text-zinc-400">No family tree data available</p>
+        <p className="bg-[#F7F7F3] text-zinc-600 dark:text-zinc-400">No family tree data available</p>
       </div>
     );
   }
@@ -54,6 +66,7 @@ export const FamilyTree: React.FC<FamilyTreeProps> = ({ data }) => {
           member={node.member} 
           spouse={node.spouse}
           isRoot={node.level === 0}
+          onPersonClick={handlePersonClick}
         />
 
         {/* Connector to children */}
@@ -105,46 +118,51 @@ export const FamilyTree: React.FC<FamilyTreeProps> = ({ data }) => {
   };
 
   return (
-    <DraggableCanvas>
-      <div className="py-12 px-8 inline-block min-w-full">
-        <div className="flex flex-col items-center">
-          {/* Header */}
-          <div className="mb-8 text-center">
-            <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">
-            {rootNode.member.fullname}  Family Tree
-            </h1>
-            {/* <p className="text-zinc-600 dark:text-zinc-400">
-              Family
-            </p> */}
-          </div>
+    <>
+      <DraggableCanvas>
+        <div className="py-12 px-8 inline-block min-w-full">
+          <div className="flex flex-col items-center">
+            {/* Header */}
+            <div className="mb-8 text-center">
+              <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">
+              {rootNode.member.fullname}  Family Tree
+              </h1>
+              {/* <p className="text-zinc-600 dark:text-zinc-400">
+                Family
+              </p> */}
+            </div>
 
-          {/* Tree visualization */}
-          <div className="flex justify-center items-start">
-            {renderTree(rootNode)}
-          </div>
+            {/* Tree visualization */}
+            <div className="flex justify-center items-start">
+              {renderTree(rootNode)}
+            </div>
 
-          {/* Legend */}
-          <div className="mt-12 flex gap-6 text-sm text-zinc-600 dark:text-zinc-400">
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 border-2 border-blue-400 dark:border-blue-600 rounded"></div>
-              <span>Male</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 border-2 border-pink-400 dark:border-pink-600 rounded"></div>
-              <span>Female</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>♥</span>
-              <span>Married</span>
-            </div>
-            {/* <div className="flex items-center gap-2">
-              <span>✝</span>
-              <span>Deceased</span>
+            {/* Legend */}
+            {/* <div className="mt-12 flex gap-6 text-sm text-zinc-600 dark:text-zinc-400">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-blue-400 dark:border-blue-600 rounded"></div>
+                <span>Male</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-pink-400 dark:border-pink-600 rounded"></div>
+                <span>Female</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>♥</span>
+                <span>Married</span>
+              </div>
             </div> */}
           </div>
         </div>
-      </div>
-    </DraggableCanvas>
+      </DraggableCanvas>
+
+      {/* Person Details Drawer */}
+      <PersonDrawer
+        person={selectedPerson}
+        isOpen={isDrawerOpen}
+        onClose={handleCloseDrawer}
+      />
+    </>
   );
 };
 

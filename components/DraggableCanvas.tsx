@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, ReactNode } from 'react';
 import { ThemeToggle } from './ThemeToggle';
+import Image from 'next/image';
 
 interface DraggableCanvasProps {
   children: ReactNode;
@@ -25,25 +26,25 @@ export const DraggableCanvas: React.FC<DraggableCanvasProps> = ({
   // Handle mouse wheel zoom
   const handleWheel = (e: WheelEvent) => {
     e.preventDefault();
-    
+
     const delta = e.deltaY > 0 ? -zoomStep : zoomStep;
     const newScale = Math.min(maxZoom, Math.max(minZoom, scale + delta));
-    
+
     if (newScale !== scale) {
       // Zoom towards cursor position
       const rect = canvasRef.current?.getBoundingClientRect();
       if (rect) {
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
-        
+
         const scaleRatio = newScale / scale;
-        
+
         setPosition(prev => ({
           x: mouseX - (mouseX - prev.x) * scaleRatio,
           y: mouseY - (mouseY - prev.y) * scaleRatio,
         }));
       }
-      
+
       setScale(newScale);
     }
   };
@@ -132,13 +133,39 @@ export const DraggableCanvas: React.FC<DraggableCanvasProps> = ({
         </div>
       </div>
 
+      {/* Quick Navigation */}
+      {/* <div className="absolute top-20 left-4 flex gap-2">
+        <div className="flex flex-col gap-2 bg-white dark:bg-zinc-900 rounded-lg shadow-lg p-2 mb-5 border border-b-2 border-zinc-200 dark:border-zinc-800">
+        <span className="font-semibold text-lg text-[#314158] dark:text-zinc-50">Navigasi Cepat</span>
+
+        <div className='flex flex-col gap-2 p-2'>
+
+          <a className='flex flex-row justify-between items-center p-1 gap-10 bg-[#F8FAFC] rounded rounded-lg border-zinc-200'>
+          <span className="font-normal text-[#314158] dark:text-zinc-50">Kel. Soeharsono</span>
+          <Image src={'icons/arrow-upper-right.svg'} alt={'redirect'} width={20} height={20} className="flex-shrink-0"></Image>
+          </a>
+
+          <a className='flex flex-row justify-between items-center p-1 gap-10 bg-[#F8FAFC] rounded rounded-lg border-zinc-200'>
+          <span className="font-normal text-[#314158] dark:text-zinc-50">Kel. Soetjipto</span>
+          <Image src={'icons/arrow-upper-right.svg'} alt={'redirect'} width={20} height={20} className="flex-shrink-0"></Image>
+          </a>
+
+          <a className='flex flex-row justify-between items-center p-1 gap-10 bg-[#F8FAFC] rounded rounded-lg border border-zinc-200'>
+          <span className="font-normal text-[#314158] dark:text-zinc-50">Kel. Soetoyo</span>
+          <Image src={'icons/arrow-upper-right.svg'} alt={'redirect'} width={20} height={20} className="flex-shrink-0"></Image>
+          </a>
+
+        </div>
+        </div>
+      </div> */}
+
       {/* Control Panel */}
-      <div className="absolute top-4 right-4 flex flex-col gap-2">
+      <div className="absolute bottom-4 right-[50%] left-[50%] flex gap-2">
         {/* Theme Toggle */}
-        <ThemeToggle />
-        
+        {/* <ThemeToggle /> */}
+
         {/* Zoom Controls */}
-        <div className="flex flex-col gap-2 bg-white dark:bg-zinc-900 rounded-lg shadow-lg p-2 border border-zinc-200 dark:border-zinc-800">
+        <div className="flex gap-2 bg-white dark:bg-zinc-900 rounded-lg shadow-lg p-2 border border-zinc-200 dark:border-zinc-800">
           {/* Zoom In */}
           <button
             onClick={handleZoomIn}
@@ -146,10 +173,13 @@ export const DraggableCanvas: React.FC<DraggableCanvasProps> = ({
             className="w-10 h-10 flex items-center justify-center rounded-md bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             title="Zoom In"
           >
-            <svg className="w-5 h-5 text-zinc-700 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
+            <Image src={'icons/zoom_in.svg'} alt={'zoom_in'} width={20} height={20} className='w-5 h-5 text-zinc-700 dark:text-zinc-30'></Image>
           </button>
+
+          {/* Zoom Level Display */}
+          <div className="text-center text-xs text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 my-auto">
+            {Math.round(scale * 100)}%
+          </div>
 
           {/* Zoom Out */}
           <button
@@ -158,13 +188,11 @@ export const DraggableCanvas: React.FC<DraggableCanvasProps> = ({
             className="w-10 h-10 flex items-center justify-center rounded-md bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             title="Zoom Out"
           >
-            <svg className="w-5 h-5 text-zinc-700 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-            </svg>
+            <Image src={'icons/zoom_out.svg'} alt={'zoom_out'} width={20} height={20} className='w-5 h-5 text-zinc-700 dark:text-zinc-30'></Image>
           </button>
 
           {/* Reset View */}
-          <button
+          {/* <button
             onClick={handleResetView}
             className="w-10 h-10 flex items-center justify-center rounded-md bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
             title="Reset View"
@@ -172,12 +200,9 @@ export const DraggableCanvas: React.FC<DraggableCanvasProps> = ({
             <svg className="w-5 h-5 text-zinc-700 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
-          </button>
+          </button> */}
 
-          {/* Zoom Level Display */}
-          <div className="text-center text-xs text-zinc-600 dark:text-zinc-400 py-1 border-t border-zinc-200 dark:border-zinc-800 mt-1">
-            {Math.round(scale * 100)}%
-          </div>
+
         </div>
       </div>
 
