@@ -83,6 +83,21 @@ export const FamilyTree: React.FC<FamilyTreeProps> = ({ data }) => {
                   const isLastChild = index === childCount - 1;
                   const isSingleChild = childCount === 1;
                   
+                  // Calculate widths for proper line connections
+                  // Single person: 240px card width
+                  // Couple: 240px + 8px + 32px + 8px + 240px = 528px
+                  const currentChildWidth = child.spouse ? 528 : 240;
+                  const prevChildWidth = index > 0 && node.children[index - 1].spouse ? 528 : 240;
+                  const nextChildWidth = index < childCount - 1 && node.children[index + 1].spouse ? 528 : 240;
+                  
+                  const gapWidth = 48; // gap-12 = 48px
+                  const halfGap = gapWidth / 2;
+                  
+                  // Line to the left connects to center of current child and center of previous child
+                  const leftLineWidth = (currentChildWidth / 2) + halfGap + (prevChildWidth / 2);
+                  // Line to the right connects to center of current child and center of next child  
+                  const rightLineWidth = (currentChildWidth / 2) + halfGap + (nextChildWidth / 2);
+                  
                   return (
                     <div key={child.member.id} className="flex flex-col items-center relative">
                       {/* Vertical connector line from horizontal bar to child */}
@@ -93,12 +108,12 @@ export const FamilyTree: React.FC<FamilyTreeProps> = ({ data }) => {
                             {/* Left side of horizontal line */}
                             {!isFirstChild && (
                               <div className="absolute right-1/2 top-0 h-0.5 bg-zinc-400 dark:bg-zinc-600" 
-                                   style={{ width: 'calc(24px + 70px)' }}></div>
+                                   style={{ width: `${leftLineWidth}px` }}></div>
                             )}
                             {/* Right side of horizontal line */}
                             {!isLastChild && (
                               <div className="absolute left-1/2 top-0 h-0.5 bg-zinc-400 dark:bg-zinc-600" 
-                                   style={{ width: 'calc(24px + 70px)' }}></div>
+                                   style={{ width: `${rightLineWidth}px` }}></div>
                             )}
                           </>
                         )}

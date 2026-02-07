@@ -104,7 +104,7 @@ export const DraggableCanvas: React.FC<DraggableCanvasProps> = ({
             </div>
 
             {/* Instructions - Hidden on mobile */}
-            <div className="hidden md:block absolute bottom-4 left-4 bg-white dark:bg-zinc-900 rounded-lg shadow-lg px-4 py-3 border border-zinc-200 dark:border-zinc-800 pointer-events-auto">
+            {/* <div className="hidden md:block absolute bottom-4 left-4 bg-white dark:bg-zinc-900 rounded-lg shadow-lg px-4 py-3 border border-zinc-200 dark:border-zinc-800 pointer-events-auto">
               <div className="flex flex-col gap-1 text-xs text-zinc-600 dark:text-zinc-400">
                 <div className="flex items-center gap-2">
                   <span className="font-semibold text-zinc-900 dark:text-zinc-50">🖱️ Drag</span>
@@ -115,14 +115,14 @@ export const DraggableCanvas: React.FC<DraggableCanvasProps> = ({
                   <span>Mouse wheel to zoom</span>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Mobile Instructions */}
-            <div className="md:hidden absolute top-4 left-1/2 -translate-x-1/2 bg-white dark:bg-zinc-900 rounded-lg shadow-lg px-4 py-2 border border-zinc-200 dark:border-zinc-800 pointer-events-auto">
+            {/* <div className="md:hidden absolute top-4 left-1/2 -translate-x-1/2 bg-white dark:bg-zinc-900 rounded-lg shadow-lg px-4 py-2 border border-zinc-200 dark:border-zinc-800 pointer-events-auto">
               <div className="text-xs text-zinc-600 dark:text-zinc-400 text-center">
                 <span className="font-semibold text-zinc-900 dark:text-zinc-50">👆 Touch:</span> Drag to pan, pinch to zoom
               </div>
-            </div>
+            </div> */}
           </>
         )}
       </TransformWrapper>
