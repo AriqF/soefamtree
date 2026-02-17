@@ -1,7 +1,15 @@
+import { CreateMemberRequest } from "./member";
+
 export enum Gender {
   MALE = 'male',
   FEMALE = 'female',
 }
+
+export enum ParentRelation {
+  FATHER = 'father',
+  MOTHER = 'mother'
+}
+
 export interface FamilyMember {
   id: string;
   fullname: string;
@@ -45,5 +53,11 @@ export interface MemberDetail{
     full_address: string;
     whatsapp_number: string;
   }
+}
+
+export interface CreateFamilyRequest {
+  father: CreateMemberRequest;
+  mother: CreateMemberRequest;
+  children: CreateMemberRequest[];
 }
 
